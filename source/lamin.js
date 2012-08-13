@@ -624,6 +624,7 @@ The mapping for multiple trampolines and targets is shown on the right side.</p>
 <tr><td class="help-key"><b>W</b></td><td>Wait</td></tr>\
 <tr><td class="help-key"><b>S</b></td><td>Shave beards in the surrounding cells, costs 1 <img src="assets/razor.png" height="20" width="20"></td></tr>\
 <tr><td class="help-key">Backspace</td><td>Undo last move</td></tr>\
+<tr><td class="help-key">Shift-Backspace</td><td>Redo move [a feature added by toddmowen]</td></tr>\
 <tr><td class="help-key"><b>C</b></td><td>Restart level</td></tr>\
 <tr><td class="help-key">Page up/down</td><td>Select previous/next level</td></tr>\
 </table>\
@@ -822,6 +823,7 @@ enyo.kind({
 		] },
 		{ kind: "onyx.Button", style: "margin: 5px", content: "Wait", ontap: "wait" },
 		{ kind: "onyx.Button", style: "margin: 5px", content: "Undo", ontap: "undo" },
+		{ kind: "onyx.Button", style: "margin: 5px", content: "Redo", ontap: "redo" },
 		{ kind: "onyx.Button", style: "margin: 5px", content: "Clear", ontap: "clear" }
 	],
 
@@ -926,6 +928,10 @@ enyo.kind({
 
 	undo: function() {
 		this.$.game.undoMove();
+	},
+
+	redo: function() {
+		this.$.game.redoMove();
 	},
 
 	clear: function() {
