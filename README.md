@@ -7,3 +7,16 @@ lamin - Lambda Miner
    * http://www.icfpconference.org/
 
 Map sources are in the assets/maps directory.
+
+
+Build instructions
+------------------
+
+If you cloned this repo without `--recursive`, you need to run:
+
+    git submodule init
+    git submodule update
+
+To build, make sure you have NodeJS in your path, and run:
+
+    tools/minify.sh
