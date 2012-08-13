@@ -526,6 +526,11 @@ enyo.kind({
 		this._mineChanged();
 	},
 
+	redoMove: function() {
+		this.mine.redo();
+		this._mineChanged();
+	},
+
 	_handleKeydown: function(event) {
 		if (event.ctrlKey || event.altKey || event.metaKey) return false;
 
@@ -536,8 +541,13 @@ enyo.kind({
 		} else if (cmd == 'C') { // clear
 			this.resetMoves();
 		} else switch (event.keyCode) {
-		case 8: // backspace -> undo
-			this.undoMove();
+		case 8: // backspace -> undo, shift backspace -> redo
+			if (event.shiftKey) {
+				this.redoMove();
+			}
+			else {
+				this.undoMove();
+			}
 			break;
 // 		case 13: // focus text field
 // 			this.$.moves.focus();

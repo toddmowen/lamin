@@ -240,6 +240,14 @@ var Mine = function() {
 		this.redos = moves[moves.length - 1] + redos;
 	};
 	
+	Mine.prototype.redo = function(command) {
+		if (!this.redos) return;
+
+		var redos = this.redos;
+		this.move(redos[0]);
+		this.redos = redos.substring(1);
+	};
+
 	Mine.prototype.move = function(command) {
 		if (this.state != ALIVE) return false;
 		if (!{'L':1,'R':1,'U':1,'D':1,'W':1,'S':1}[command]) return false;
@@ -326,6 +334,7 @@ var Mine = function() {
 		}
 		this.moveCount++;
 		this.moves += command;
+		this.redos = "";  // new move invalidates redo buffer
 		if (0 == this.lambdas) {
 			if (false !== this.lift) {
 				/* skip 'L' == this.map[this.lift.y][this.lift.x] - official validator replaces
