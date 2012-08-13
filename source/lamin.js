@@ -867,14 +867,16 @@ enyo.kind({
 		this.levelsChanged();
 		this.fragmentUpdateTimer = false;
 
+		if (loadMoves !== '') {
+	// 		console.log("preset moves: " + loadMoves);
+			this.$.game._addMoves(loadMoves);
+		}
+
 		if (fragment.length > 2) {
 			this.$.game.mine.redos = fragment[2];
 		}
 
-		if (loadMoves !== '') {
-	// 		console.log("preset moves: " + loadMoves);
-			this.$.game.addMoves(loadMoves);
-		}
+		this.$.game._mineChanged();
 	},
 
 	levelMenuSetupItem: function(sender, event) {
