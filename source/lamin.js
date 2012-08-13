@@ -855,6 +855,10 @@ enyo.kind({
 		this.levelsChanged();
 		this.fragmentUpdateTimer = false;
 
+		if (fragment.length > 2) {
+			this.$.game.mine.redos = fragment[2];
+		}
+
 		if (loadMoves !== '') {
 	// 		console.log("preset moves: " + loadMoves);
 			this.$.game.addMoves(loadMoves);
@@ -901,6 +905,9 @@ enyo.kind({
 			window.clearTimeout(this.fragmentUpdateTimer);
 		}
 		var url = '#' + this.level.name + ';' + event.mine.moves;
+		if (event.mine.redos) {
+			url += ';' + event.mine.redos;
+		}
 		window.setTimeout(function() {
 			this.fragmentUpdateTimer = false;
 			location.replace(url);

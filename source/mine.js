@@ -36,6 +36,7 @@ var Mine = function() {
 		this.found_lambdas = 0;
 		this.moveCount = 0;
 		this.moves = "";
+		this.redos = "";
 		this.score = 0;
 		this.moves_below_water = 0;
 		this.water = {
@@ -228,10 +229,15 @@ var Mine = function() {
 	
 	Mine.prototype.undo = function(command) {
 		var moves = this.moves;
+		var redos = this.redos;
+
+		if (moves.length == 0) return;
+
 		this.parse(this.orig_map);
 		for (var i = 0; i < moves.length - 1; ++i){
 			this.move(moves[i]);
 		}
+		this.redos = moves[moves.length - 1] + redos;
 	};
 	
 	Mine.prototype.move = function(command) {
